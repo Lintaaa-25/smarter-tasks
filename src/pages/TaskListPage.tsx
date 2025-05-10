@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import { TaskItem } from "../types";
 import { v4 as uuidv4 } from "uuid";
@@ -14,6 +14,11 @@ const TaskListPage = () => {
   const [desc, setDesc] = useState("");
   const [date, setDate] = useState("");
 
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    setTasks(storedTasks);
+  }, []);
+
   const handleAddTask = () => {
     if (!title || !desc || !date) return;
     const newTask: TaskItem = {
@@ -22,14 +27,18 @@ const TaskListPage = () => {
       todoDescription: desc,
       todoDueDate: date,
     };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks)); // Persist tasks in localStorage
     setTitle("");
     setDesc("");
     setDate("");
   };
 
   const handleDelete = (id: string) => {
-    setTasks(tasks.filter((t) => t.id !== id));
+    const updatedTasks = tasks.filter((t) => t.id !== id);
+    setTasks(updatedTasks);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks)); // Persist tasks after deletion
   };
 
   return (
