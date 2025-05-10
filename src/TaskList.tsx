@@ -2,25 +2,31 @@ import React from "react";
 import { TaskItem } from "./types";
 import Task from "./Task";
 
-interface TaskListProps {
+interface Props {
   tasks: TaskItem[];
+  deleteTask: (index: number) => void;
 }
 
-class TaskList extends React.Component<TaskListProps> {
-  render() {
-    return (
-      <div>
-        {this.props.tasks.map((task, index) => (
+const TaskList = ({ tasks, deleteTask }: Props) => {
+  return (
+    <ul>
+      {tasks.map((task, idx) => (
+        <li key={idx} className="mb-2 list-none">
           <Task
-            key={index}
             title={task.title}
             description={task.description}
             dueDate={task.dueDate}
           />
-        ))}
-      </div>
-    );
-  }
-}
+          <button
+            className="deleteTaskButton bg-red-500 text-white px-2 py-1 rounded mt-1"
+            onClick={() => deleteTask(idx)}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 export default TaskList;
