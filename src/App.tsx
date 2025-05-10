@@ -13,6 +13,7 @@ import TaskDetailsPage from "./pages/TaskDetailsPage";
 import Signin from "./pages/Signin";
 import ProtectedRoute from "./ProtectedRoute";
 import NotFound from "./pages/Notfound";
+
 const router = createBrowserRouter([
   {
     path: "/",
