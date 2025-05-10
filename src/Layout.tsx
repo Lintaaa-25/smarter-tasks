@@ -10,15 +10,6 @@ const Layout = () => {
   const hideHeader = location.pathname === "/notfound";
   return (
     <>
-      <nav className="bg-slate-900 text-white p-4 flex justify-between">
-        <div>
-          <a href="/" className="mr-4">
-            Home
-          </a>
-          <a href="/tasks">Tasks</a>
-        </div>
-        <span className="font-bold">Smarter Tasks</span>
-      </nav>
       {!hideHeader && <Header />}
       <Outlet context={{ tasks, setTasks }} />
     </>
