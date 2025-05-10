@@ -82,7 +82,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
           id="addTaskButton"
           className="bg-blue-500 text-white px-4 py-1 rounded"
         >
-          Add item
+          Add Task
         </button>
       </form>
     );
