@@ -1,14 +1,3 @@
-import React, { useState, useEffect } from "react";
-import { useOutletContext, Link } from "react-router-dom";
-import { TaskItem } from "../types";
-import { v4 as uuidv4 } from "uuid";
-import useLocalStorage from "../hooks/useLocalStorage";  // Import the custom hook
-
-type ContextType = {
-  tasks: TaskItem[];
-  setTasks: React.Dispatch<React.SetStateAction<TaskItem[]>>;
-};
-
 const TaskListPage = () => {
   const { tasks, setTasks } = useOutletContext<ContextType>();
   const [title, setTitle] = useState("");
@@ -44,6 +33,9 @@ const TaskListPage = () => {
     setStoredTasks(updatedTasks);  // Update local storage with the updated task list
   };
 
+  // Ensure tasks is always an array before using map
+  const tasksToDisplay = Array.isArray(tasks) ? tasks : [];
+
   return (
     <div className="p-6 max-w-xl mx-auto">
       <h2 className="text-xl font-semibold mb-4">Pending</h2>
@@ -76,7 +68,7 @@ const TaskListPage = () => {
       </button>
 
       <div className="mt-6 space-y-4">
-        {tasks.map((task) => (
+        {tasksToDisplay.map((task) => (
           <div key={task.id} className="bg-white shadow p-4 rounded">
             <Link to={`/tasks/${task.id}`}>
               <h3 className="font-bold text-lg">{task.todoTitle}</h3>
@@ -95,5 +87,3 @@ const TaskListPage = () => {
     </div>
   );
 };
-
-export default TaskListPage;
