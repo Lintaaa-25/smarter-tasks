@@ -15,7 +15,7 @@ const TaskDetailsPage = () => {
 
   return (
     <div className="p-6 max-w-md mx-auto bg-white shadow-md rounded">
-      <h1 className="text-2xl font-bold mb-2">{task.todoTitle}</h1>
+      <h3 className="text-2xl font-bold mb-2">{task.todoTitle}</h3>
       <p className="mb-2 text-gray-700">{task.todoDescription}</p>
       <p className="text-sm text-gray-500">Due Date: {task.todoDueDate}</p>
     </div>
