@@ -6,7 +6,6 @@ function Signin() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  localStorage.setItem("authenticated", "false");
   function handleSignin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (username === "admin" && password === "admin") {
