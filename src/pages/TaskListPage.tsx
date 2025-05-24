@@ -50,36 +50,45 @@ const TaskListPage = () => {
     <div className="p-6 max-w-xl mx-auto">
       <h2 className="text-xl font-semibold mb-4">Pending</h2>
 
+     <input
+  id="todoTitle"
+  required
+  type="text"
+  placeholder="Todo Title"
+  value={title}
+  onChange={(e) => setTitle(e.target.value)}
+  className="block w-full mb-2 border p-2"
+/>
+
       <input
-        type="text"
-        placeholder="Todo Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        className="block w-full mb-2 border p-2"
-      />
-      <input
-        type="text"
-        placeholder="Description"
-        value={desc}
-        onChange={(e) => setDesc(e.target.value)}
-        className="block w-full mb-2 border p-2"
-      />
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-        className="block w-full mb-2 border p-2"
-      />
+  id="todoDescription"
+  required
+  type="text"
+  placeholder="Description"
+  value={desc}
+  onChange={(e) => setDesc(e.target.value)}
+  className="block w-full mb-2 border p-2"
+/>
+     <input
+  id="todoDueDate"
+  required
+  type="date"
+  value={date}
+  onChange={(e) => setDate(e.target.value)}
+  className="block w-full mb-2 border p-2"
+/>
       <button
-        onClick={handleAddTask}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        Add Task
-      </button>
+  id="addTaskButton"
+  onClick={handleAddTask}
+  className="bg-blue-500 text-white px-4 py-2 rounded"
+>
+  Add Task
+</button>
+
 
       <div className="mt-6 space-y-4">
         {tasks.map((task) => (
-          <div key={task.id} className="bg-white shadow p-4 rounded">
+          <div key={task.id} className="TaskItem bg-white shadow p-4 rounded">
             <Link to={`/tasks/${task.id}`}>
               <h3 className="font-bold text-lg">{task.todoTitle}</h3>
               <p>{task.todoDescription}</p>
