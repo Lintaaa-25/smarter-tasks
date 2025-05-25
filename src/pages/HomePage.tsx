@@ -1,13 +1,11 @@
 import React from "react";
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-screen">
-      <h1 className="text-4xl font-bold mb-4">Task Manager</h1>
-      <p className="text-lg text-gray-600">
-        Welcome to the Task Manager application!
-      </p>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold">Welcome to the Task Manager</h2>
     </div>
   );
 };
+
 export default HomePage;
