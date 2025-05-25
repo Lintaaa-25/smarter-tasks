@@ -1,40 +1,30 @@
-
 import React, { useEffect } from "react";
 import { TaskItem } from "./types";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
-interface TaskAppState {
-  tasks: TaskItem[];
-}
-
 const TaskApp = () => {
-  const [taskAppState, setTaskAppState] = useLocalStorage<TaskAppState>(
-    "tasks",
-    {
-      tasks: [],
-    }
-  );
+  const [tasks, setTasks] = useLocalStorage<TaskItem[]>("tasks", []);
 
   const addTask = (task: TaskItem) => {
-    setTaskAppState({ tasks: [...taskAppState.tasks, task] });
+    setTasks([...tasks, task]);
   };
 
   const deleteTask = (index: number) => {
-    const updatedTasks = taskAppState.tasks.filter((_, i) => i !== index);
-    setTaskAppState({ tasks: updatedTasks });
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
   };
 
   useEffect(() => {
     const id = setTimeout(() => {
-      console.log(`Saved ${taskAppState.tasks.length} items to backend...`);
+      console.log(`Saved ${tasks.length} items to localStorage...`);
     }, 5000);
     return () => {
-      console.log("clear or cancel any existing network call");
+      console.log("Cleanup");
       clearTimeout(id);
     };
-  }, [taskAppState.tasks]);
+  }, [tasks]);
 
   return (
     <div className="container py-10 max-w-7xl mx-auto">
@@ -51,7 +41,7 @@ const TaskApp = () => {
             Pending
           </h1>
           <TaskForm addTask={addTask} />
-          <TaskList tasks={taskAppState.tasks} deleteTask={deleteTask} />
+          <TaskList tasks={tasks} deleteTask={deleteTask} />
         </div>
       </div>
     </div>
