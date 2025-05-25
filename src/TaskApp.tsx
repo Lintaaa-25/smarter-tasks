@@ -16,8 +16,13 @@ const TaskApp = () => {
   const tasks = taskAppState?.tasks ?? [];
 
   const addTask = (task: TaskItem) => {
-    setTaskAppState({ tasks: [...tasks, task] });
+  const newTask = {
+    ...task,
+    id: crypto.randomUUID(), // ensures a unique id for localStorage and routing
   };
+  setTaskAppState({ tasks: [...tasks, newTask] });
+};
+
 
   const deleteTask = (taskToDelete: TaskItem) => {
     const updatedTasks = tasks.filter((t) => t.id !== taskToDelete.id);
