@@ -4,19 +4,19 @@ import Task from "./Task";
 
 interface TaskListProps {
   tasks: TaskItem[];
-  deleteTask: (index: number) => void;
+  deleteTask: (task: TaskItem) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, deleteTask }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks = [], deleteTask }) => {
   return (
     <div className="space-y-4">
-      {tasks.map((task, index) => (
-        <div key={task.id ?? index} className="border p-4 rounded shadow-sm">
-          <Task {...task} />
+      {tasks.map((task) => (
+        <div key={task.id} className="border p-4 rounded shadow-sm">
+          <Task item={task} removeTask={deleteTask} />
           <button
             className="bg-red-500 text-white px-3 py-1 rounded mt-2"
-            onClick={() => deleteTask(index)}
-            aria-label={`Delete task ${task.title}`}
+            onClick={() => deleteTask(task)}
+            aria-label={`Delete task ${task.todoTitle}`}
           >
             Delete
           </button>
