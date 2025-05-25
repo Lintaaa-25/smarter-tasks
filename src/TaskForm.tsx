@@ -37,7 +37,7 @@ class TaskForm extends React.Component<TaskFormProps, TaskFormState> {
     event.preventDefault();
     const { title, description, dueDate } = this.state;
 
-    if (title.trim() === "" || dueDate.trim() === "") return;
+    if (title.trim() === "" || dueDate.trim() === "" || description.trim() === "") return;
 
     const newTask: TaskItem = {
       id: Date.now().toString(), 
