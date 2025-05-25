@@ -5,8 +5,7 @@ function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
-  localStorage.setItem("authenticated", "true");
+  localStorage.setItem("authenticated", "false");
 
   function handleSignin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,35 +25,43 @@ function Signin() {
         </h2>
         <form onSubmit={handleSignin}>
           <div>
-            <label htmlFor="username" className="block text-gray-700 font-semibold mb-2">
+            <label
+              htmlFor="username"
+              className="block text-gray-700 font-semibold mb-2"
+            >
               Username
             </label>
             <input
               type="text"
               id="username"
+              name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your username"
-              className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </div>
           <div className="mt-4">
-            <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-semibold mb-2"
+            >
               Password
             </label>
             <input
               type="password"
               id="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
-              className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
             />
           </div>
           <div className="mt-8">
             <button
               type="submit"
-              className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md"
+              className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray"
             >
               Sign In
             </button>
