@@ -1,18 +1,17 @@
 import React from "react";
-import "./index.css";
 import {
   createBrowserRouter,
   Navigate,
   RouterProvider,
 } from "react-router-dom";
-
 import HomePage from "./pages/HomePage";
 import TaskListPage from "./pages/TaskListPage";
-import Layout from "./Layout";
 import TaskDetailsPage from "./pages/TaskDetailsPage";
 import Signin from "./pages/Signin";
 import ProtectedRoute from "./ProtectedRoute";
-import NotFound from "./pages/Notfound";
+import Layout from "./Layout";
+import NotFound from "./pages/Notfound"; // Import NotFound page
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -30,9 +29,9 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: "/home", element: <HomePage /> },
-      { path: "/tasks", element: <TaskListPage /> },
-      { path: "/tasks/:id", element: <TaskDetailsPage /> },
+      { path: "home", element: <HomePage /> },
+      { path: "tasks", element: <TaskListPage /> },
+      { path: "tasks/:id", element: <TaskDetailsPage /> },
     ],
   },
   {
@@ -45,8 +44,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => {
-  return <RouterProvider router={router} />;
-};
+const App = () => <RouterProvider router={router} />;
 
 export default App;
