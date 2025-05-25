@@ -90,9 +90,14 @@ const TaskForm = (props: TaskFormProps) => {
           </label>
         </div>
         <div className="relative z-0 w-full mb-6 group">
-          <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded">
+          <button
+            id="addTaskButton"
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-1 rounded"
+          >
             Add Task
           </button>
+
         </div>
       </div>
     </form>
