@@ -1,8 +1,7 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
-import useLocalStorage from "../hooks/useLocalStorage";
-
-import { TaskItem } from "../types";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { TaskItem } from '../types';
 
 interface TaskAppState {
   tasks: TaskItem[];
@@ -12,30 +11,25 @@ const TaskDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [taskAppState] = useLocalStorage<TaskAppState>("tasks", { tasks: [] });
 
-  const task = taskAppState.tasks.find((t) => t.id === id);
+  const task = taskAppState.tasks.find(task => task.id === id);
 
   if (!task) {
     return (
-      <div className="p-6">
-        <h2 className="text-xl font-semibold text-red-600">Task not found</h2>
-        <Link to="/tasks" className="text-blue-600 underline mt-4 block">
-          Back to Task List
-        </Link>
+      <div className="p-6 text-center text-red-600">
+        Task not found.
       </div>
     );
   }
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h3 className="text-2xl font-bold mb-2">{task.title}</h3>
-      <p className="text-gray-700 mb-2">{task.description}</p>
-      <p className="text-sm text-gray-500 mb-4">Due: {task.dueDate}</p>
-      <Link to="/tasks" className="text-blue-600 underline">
-        Back to Task List
-      </Link>
+    <div className="bg-white shadow-md rounded-md p-4 m-8">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-medium">{task.title}</h3>
+      </div>
+      <p className="text-gray-600">{task.description}</p>
+      <p className="text-gray-600">{task.dueDate}</p>
     </div>
   );
 };
 
 export default TaskDetailsPage;
-
