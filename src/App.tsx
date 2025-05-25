@@ -1,4 +1,3 @@
-import React from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -10,8 +9,7 @@ import TaskDetailsPage from "./pages/TaskDetailsPage";
 import Signin from "./pages/Signin";
 import ProtectedRoute from "./ProtectedRoute";
 import Layout from "./Layout";
-import NotFound from "./pages/Notfound"; // Import NotFound page
-import "./index.css";
+import NotFound from "./pages/Notfound";
 
 const router = createBrowserRouter([
   {
@@ -29,21 +27,32 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: "home", element: <HomePage /> },
-      { path: "tasks", element: <TaskListPage /> },
-      { path: "tasks/:id", element: <TaskDetailsPage /> },
+      {
+        path: "home",
+        element: <HomePage />,
+      },
+      {
+        path: "tasks",
+        element: <TaskListPage />,
+      },
+      {
+        path: "tasks/:id",
+        element: <TaskDetailsPage />,
+      },
+      {
+        path: "notfound",
+        element: <NotFound />,
+      },
+      {
+        path: "*", // <-- catch-all for any unmatched route
+        element: <Navigate to="/notfound" replace />,
+      },
     ],
-  },
-  {
-    path: "/notfound",
-    element: <NotFound />,
-  },
-  {
-    path: "*",
-    element: <Navigate to="/notfound" replace />,
-  },
+  }
 ]);
 
-const App = () => <RouterProvider router={router} />;
+const App = () => {
+  return <RouterProvider router={router} />;
+};
 
 export default App;
