@@ -6,7 +6,7 @@ function Signin() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  localStorage.setItem("authenticated", "false");
+  localStorage.setItem("authenticated", "true");
 
   function handleSignin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
