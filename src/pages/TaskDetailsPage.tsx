@@ -9,9 +9,9 @@ interface TaskAppState {
 
 const TaskDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [taskAppState] = useLocalStorage<TaskAppState>("tasks", { tasks: [] });
+ const [tasks] = useLocalStorage<TaskItem[]>("tasks", []);
+ const task = tasks.find(task => task.id === id);
 
-  const task = taskAppState.tasks.find(task => task.id === id);
 
   if (!task) {
     return (
