@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-// First we will import the API_ENDPOINT constant from the `config` folder
 import { API_ENDPOINT } from '../../config/constants';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const SigninForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  // Then we will define the handle submit function
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -21,21 +20,24 @@ const SigninForm: React.FC = () => {
         throw new Error('Sign-in failed');
       }
 
-      console.log('Sign-in successful');
-      
-      // extract the response body as JSON data
       const data = await response.json();
 
-      // After successful signin, first we will save the token in localStorage
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('userData', JSON.stringify(data.user));
-      navigate('/dashboard'); 
-      
+      // ✅ Safe storage of token and user data
+      if (data.token && data.user) {
+        localStorage.setItem('authToken', JSON.stringify(data.token));
+        localStorage.setItem('userData', JSON.stringify(data.user));
+        console.log('Sign-in successful');
+        navigate('/dashboard');
+      } else {
+        throw new Error('Invalid response format: Missing token or user data');
+      }
+
     } catch (error) {
       console.error('Sign-in failed:', error);
+      alert('Sign-in failed. Please check your credentials and try again.');
     }
   };
-  // Then we will use the handleSubmit function with our form
+
   return (
     <form onSubmit={handleSubmit}>
       <div>
