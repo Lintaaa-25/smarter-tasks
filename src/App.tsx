@@ -1,11 +1,8 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Notfound from "./pages/Notfound";
-import Signup from './pages/signup';
-// First, we've to import the Signin component
-import Signin from './pages/signin';
+import Signup from "./pages/signup";
+import Signin from "./pages/signin";
 import Dashboard from "./pages/dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -23,10 +20,6 @@ const router = createBrowserRouter([
     element: <Signin />,
   },
   {
-    path: "/notfound",
-    element: <Notfound />,
-  },
-  {
     path: "/dashboard",
     element: (
       <ProtectedRoute>
@@ -35,15 +28,17 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/notfound",
+    element: <Notfound />,
+  },
+  {
     path: "*",
     element: <Notfound />,
-  }
+  },
 ]);
 
-const App = () => {
-  return (
-    <RouterProvider router={router} />
-  );
-}
+const App: React.FC = () => {
+  return <RouterProvider router={router} />;
+};
 
-export default App
+export default App;
