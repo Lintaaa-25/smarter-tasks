@@ -38,7 +38,7 @@ const NewMember = () => {
   return (
     <>
       <button
-        id="new-member-btn"
+        id="new-member-btn" // ✅ Required for testing
         type="button"
         onClick={openModal}
         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90"
@@ -80,34 +80,34 @@ const NewMember = () => {
                     {error && <p className="text-red-500 text-sm">{error}</p>}
 
                     <input
-                      id="name"
-                      {...register('name', { required: true })}
+                      id="name" // ✅ Required by test
+                      {...register('name', { required: "Name is required" })}
                       placeholder="Name"
-                      className="w-full border rounded-md py-2 px-3 mt-4"
+                      className={`w-full border rounded-md py-2 px-3 mt-4 ${errors.name ? "border-red-500" : "border-gray-300"}`}
                     />
-                    {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
+                    {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
 
                     <input
-                      id="email"
+                      id="email" // ✅ Required by test
                       type="email"
-                      {...register('email', { required: true })}
+                      {...register('email', { required: "Email is required" })}
                       placeholder="Email"
-                      className="w-full border rounded-md py-2 px-3 mt-2"
+                      className={`w-full border rounded-md py-2 px-3 mt-2 ${errors.email ? "border-red-500" : "border-gray-300"}`}
                     />
-                    {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
 
                     <input
-                      id="password"
+                      id="password" // ✅ Required by test
                       type="password"
-                      {...register('password', { required: true })}
+                      {...register('password', { required: "Password is required" })}
                       placeholder="Password"
-                      className="w-full border rounded-md py-2 px-3 mt-2"
+                      className={`w-full border rounded-md py-2 px-3 mt-2 ${errors.password ? "border-red-500" : "border-gray-300"}`}
                     />
-                    {errors.password && <p className="text-red-500 text-sm">Password is required</p>}
+                    {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
 
                     <div className="flex justify-end gap-2 mt-4">
                       <button
-                        id="create-member-btn"
+                        id="create-member-btn" // ✅ Required by test
                         type="submit"
                         className="bg-blue-600 text-white px-4 py-2 rounded-md"
                       >
