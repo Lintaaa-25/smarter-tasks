@@ -30,7 +30,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("authToken", resData.token);
       localStorage.setItem("userData", JSON.stringify(resData.user));
 
-      navigate("/account");
+      navigate("/account/projects");
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
