@@ -11,7 +11,11 @@ type Inputs = {
 const SigninForm: React.FC = () => {
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -30,7 +34,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("authToken", resData.token);
       localStorage.setItem("userData", JSON.stringify(resData.user));
 
-      navigate("/account/projects");
+      navigate("/account/projects"); // ✅ required redirection
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
@@ -39,6 +43,7 @@ const SigninForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
+        id="email" // ✅ Required by test
         type="email"
         placeholder="Email"
         {...register("email", { required: "Email is required" })}
@@ -46,9 +51,12 @@ const SigninForm: React.FC = () => {
           errors.email ? "border-red-500" : "border-gray-300"
         }`}
       />
-      {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+      {errors.email && (
+        <span className="text-red-500 text-sm">{errors.email.message}</span>
+      )}
 
       <input
+        id="password" // ✅ Required by test
         type="password"
         placeholder="Password"
         {...register("password", { required: "Password is required" })}
@@ -56,7 +64,9 @@ const SigninForm: React.FC = () => {
           errors.password ? "border-red-500" : "border-gray-300"
         }`}
       />
-      {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+      {errors.password && (
+        <span className="text-red-500 text-sm">{errors.password.message}</span>
+      )}
 
       <button
         type="submit"
