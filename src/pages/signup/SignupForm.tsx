@@ -4,13 +4,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { API_ENDPOINT } from "../../config/constants";
 
 type Inputs = {
-  email: string;
-  password: string;
+  organisationName: string;
+  userName: string;
+  userEmail: string;
+  userPassword: string;
 };
 
 const SignupForm: React.FC = () => {
   const navigate = useNavigate();
-
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -18,46 +19,57 @@ const SignupForm: React.FC = () => {
       const response = await fetch(`${API_ENDPOINT}/organisations`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          name: data.organisationName,
+          user: {
+            name: data.userName,
+            email: data.userEmail,
+            password: data.userPassword,
+          }
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error("Sign-up failed");
-      }
-
       const resData = await response.json();
+      if (!response.ok) {
+        throw new Error(resData.errors?.[0]?.message || "Signup failed");
+      }
 
       localStorage.setItem("authToken", resData.token);
       localStorage.setItem("userData", JSON.stringify(resData.user));
-
-      navigate("/account");
+      navigate("/account/projects");
     } catch (error) {
-      console.error("Sign-up failed:", error);
+      console.error("Signup failed:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <input
-        type="email"
-        placeholder="Email"
-        {...register("email", { required: "Email is required" })}
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.email ? "border-red-500" : "border-gray-300"
-        }`}
+        id="organisationName"
+        {...register("organisationName", { required: true })}
+        placeholder="Organisation Name"
+        className="w-full border rounded-md py-2 px-3 my-2"
       />
-      {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
-
       <input
-        type="password"
-        placeholder="Password"
-        {...register("password", { required: "Password is required" })}
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.password ? "border-red-500" : "border-gray-300"
-        }`}
+        id="userName"
+        {...register("userName", { required: true })}
+        placeholder="Your Name"
+        className="w-full border rounded-md py-2 px-3 my-2"
       />
-      {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
-
+      <input
+        id="userEmail"
+        type="email"
+        {...register("userEmail", { required: true })}
+        placeholder="Email"
+        className="w-full border rounded-md py-2 px-3 my-2"
+      />
+      <input
+        id="userPassword"
+        type="password"
+        {...register("userPassword", { required: true })}
+        placeholder="Password"
+        className="w-full border rounded-md py-2 px-3 my-2"
+      />
       <button
         type="submit"
         className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
