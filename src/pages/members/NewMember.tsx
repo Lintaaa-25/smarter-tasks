@@ -38,7 +38,7 @@ const NewMember = () => {
   return (
     <>
       <button
-        id="new-member-btn" // ✅ Required for testing
+        id="new-member-btn"
         type="button"
         onClick={openModal}
         className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-90"
@@ -76,10 +76,9 @@ const NewMember = () => {
                     Create new member
                   </Dialog.Title>
 
-                  // inside <form>
                   <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-                  
+
                     <div>
                       <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
                         Name:
@@ -92,7 +91,7 @@ const NewMember = () => {
                       />
                       {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                     </div>
-                  
+
                     <div>
                       <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
                         Email:
@@ -106,7 +105,7 @@ const NewMember = () => {
                       />
                       {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                     </div>
-                  
+
                     <div>
                       <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">
                         Password:
@@ -120,7 +119,7 @@ const NewMember = () => {
                       />
                       {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                     </div>
-                  
+
                     <div className="flex justify-end gap-2 mt-4">
                       <button
                         id="create-member-btn"
@@ -138,7 +137,6 @@ const NewMember = () => {
                       </button>
                     </div>
                   </form>
-
                 </Dialog.Panel>
               </Transition.Child>
             </div>
