@@ -29,11 +29,13 @@ const MemberListItems: React.FC<Props> = ({ members }) => {
           <h3 className="text-lg font-semibold">{member.name}</h3>
           <p className="text-sm text-gray-500">{member.email}</p>
           <button
+            type="button"
+            className="delete-member-btn absolute top-2 right-2 text-red-500 hover:text-red-700"
             onClick={() => handleDelete(member.id)}
-            className="absolute top-2 right-2 text-red-500 hover:text-red-700"
           >
             <TrashIcon className="w-5 h-5" />
           </button>
+
         </div>
       ))}
     </>
