@@ -34,7 +34,7 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("authToken", resData.token);
       localStorage.setItem("userData", JSON.stringify(resData.user));
 
-      navigate("/account/projects"); // ✅ required redirection
+      navigate("/account/projects");
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
@@ -42,31 +42,41 @@ const SigninForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        id="email" // ✅ Required by test
-        type="email"
-        placeholder="Email"
-        {...register("email", { required: "Email is required" })}
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.email ? "border-red-500" : "border-gray-300"
-        }`}
-      />
-      {errors.email && (
-        <span className="text-red-500 text-sm">{errors.email.message}</span>
-      )}
+      <div>
+        <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
+          Email:
+        </label>
+        <input
+          id="email"
+          type="email"
+          placeholder="Email"
+          {...register("email", { required: "Email is required" })}
+          className={`w-full border rounded-md py-2 px-3 my-2 ${
+            errors.email ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.email && (
+          <span className="text-red-500 text-sm">{errors.email.message}</span>
+        )}
+      </div>
 
-      <input
-        id="password" // ✅ Required by test
-        type="password"
-        placeholder="Password"
-        {...register("password", { required: "Password is required" })}
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.password ? "border-red-500" : "border-gray-300"
-        }`}
-      />
-      {errors.password && (
-        <span className="text-red-500 text-sm">{errors.password.message}</span>
-      )}
+      <div>
+        <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">
+          Password:
+        </label>
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          {...register("password", { required: "Password is required" })}
+          className={`w-full border rounded-md py-2 px-3 my-2 ${
+            errors.password ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.password && (
+          <span className="text-red-500 text-sm">{errors.password.message}</span>
+        )}
+      </div>
 
       <button
         type="submit"
