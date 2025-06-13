@@ -49,55 +49,79 @@ const SignupForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        id="organisationName"
-        {...register("organisationName", { required: "Organisation name is required" })}
-        placeholder="Organisation Name"
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.organisationName ? "border-red-500" : "border-gray-300"
-        }`}
-      />
-      {errors.organisationName && (
-        <span className="text-red-500 text-sm">{errors.organisationName.message}</span>
-      )}
+      {/* Organisation Name */}
+      <div>
+        <label htmlFor="organisationName" className="block text-gray-700 font-semibold mb-2">
+          Organisation Name:
+        </label>
+        <input
+          id="organisationName"
+          {...register("organisationName", { required: "Organisation name is required" })}
+          placeholder="Organisation Name"
+          className={`w-full border rounded-md py-2 px-3 my-2 ${
+            errors.organisationName ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.organisationName && (
+          <span className="text-red-500 text-sm">{errors.organisationName.message}</span>
+        )}
+      </div>
 
-      <input
-        id="userName"
-        {...register("userName", { required: "Your name is required" })}
-        placeholder="Your Name"
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.userName ? "border-red-500" : "border-gray-300"
-        }`}
-      />
-      {errors.userName && (
-        <span className="text-red-500 text-sm">{errors.userName.message}</span>
-      )}
+      {/* User Name */}
+      <div>
+        <label htmlFor="userName" className="block text-gray-700 font-semibold mb-2">
+          Your Name:
+        </label>
+        <input
+          id="userName"
+          {...register("userName", { required: "Your name is required" })}
+          placeholder="Your Name"
+          className={`w-full border rounded-md py-2 px-3 my-2 ${
+            errors.userName ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.userName && (
+          <span className="text-red-500 text-sm">{errors.userName.message}</span>
+        )}
+      </div>
 
-      <input
-        id="userEmail"
-        type="email"
-        {...register("userEmail", { required: "Email is required" })}
-        placeholder="Email"
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.userEmail ? "border-red-500" : "border-gray-300"
-        }`}
-      />
-      {errors.userEmail && (
-        <span className="text-red-500 text-sm">{errors.userEmail.message}</span>
-      )}
+      {/* Email */}
+      <div>
+        <label htmlFor="userEmail" className="block text-gray-700 font-semibold mb-2">
+          Email:
+        </label>
+        <input
+          id="userEmail"
+          type="email"
+          {...register("userEmail", { required: "Email is required" })}
+          placeholder="Email"
+          className={`w-full border rounded-md py-2 px-3 my-2 ${
+            errors.userEmail ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.userEmail && (
+          <span className="text-red-500 text-sm">{errors.userEmail.message}</span>
+        )}
+      </div>
 
-      <input
-        id="userPassword"
-        type="password"
-        {...register("userPassword", { required: "Password is required" })}
-        placeholder="Password"
-        className={`w-full border rounded-md py-2 px-3 my-2 ${
-          errors.userPassword ? "border-red-500" : "border-gray-300"
-        }`}
-      />
-      {errors.userPassword && (
-        <span className="text-red-500 text-sm">{errors.userPassword.message}</span>
-      )}
+      {/* Password */}
+      <div>
+        <label htmlFor="userPassword" className="block text-gray-700 font-semibold mb-2">
+          Password:
+        </label>
+        <input
+          id="userPassword"
+          type="password"
+          {...register("userPassword", { required: "Password is required" })}
+          placeholder="Password"
+          className={`w-full border rounded-md py-2 px-3 my-2 ${
+            errors.userPassword ? "border-red-500" : "border-gray-300"
+          }`}
+        />
+        {errors.userPassword && (
+          <span className="text-red-500 text-sm">{errors.userPassword.message}</span>
+        )}
+      </div>
 
       <button
         type="submit"
